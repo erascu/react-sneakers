@@ -1,0 +1,106 @@
+.favourite {
+    padding: 37px 0;
+    margin-bottom: 85px;
+}
+
+.favourite__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    h1 {
+        color: #000;
+        font-size: 32px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .search {
+        border: 1px solid #F3F3F3;
+        padding: 15px 18px;
+        border-radius: 10px;
+        width: 250px;
+        display: flex;
+        flex-wrap: nowrap;
+
+        img {
+            margin-right: 14px;
+        }
+    }
+}
+
+.favourite__block {
+    // display: flex;
+    // justify-content: space-between;
+    // flex-wrap: wrap;
+    display: grid;
+    column-gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+
+.favourite__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 0;
+
+    img {
+        width: 70px;
+        margin-bottom: 24px;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 29px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0em;
+        text-align: center;
+        opacity: 0.4;
+        margin-bottom: 70px;
+    }
+
+    // button {
+    //     background-color: #9DD458;
+    //     padding: 18px 30px;
+
+    //     font-size: 16px;
+    //     font-weight: 600;
+    //     line-height: 19px;
+    //     letter-spacing: 0em;
+    //     color: #FFFFFF;
+    //     border-radius: 18px;
+    //     transition: background-color .1s ease-in-out;
+
+    //     &:hover {
+    //         background-color: lighten(#9DD458, 5%);
+    //     }
+
+    //     &:active {
+    //         background-color: darken(#9DD458, 5%);
+    //     }
+    // }
+}
+
+@media (max-width: 609px) {
+    .favourite__top {
+        justify-content: center;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 539px) {
+    .favourite__block {
+        justify-content: center;
+    }
+}

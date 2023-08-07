@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import Cart from './components/Cart/Cart';
+import Favourite from './components/Favourite/Favourite';
 
 function App() {
+  const [cartOpened, setCartOpened] = useState(false);
+  // const [cartItems, setCartItems] = useState([]);
+
+  const [favourite, setFavourite] = useState(false);
+
+  cartOpened ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto';
+
+  const refreshPage = () => {
+    window.location.reload(true);
+  }
+
+  const favClicked = () => {
+    setFavourite(true);
+  }
+
+  // const onAddToCart = (obj) => {
+  //   setCartItems([...cartItems, obj]);
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {cartOpened && <Cart onClose={() => setCartOpened(false)} />}
+      <div className='container'>
+        <Header onClickCart={() => setCartOpened(true)} onClickFav={favClicked} onLogoClick={refreshPage} />
+        {!favourite && <Main />}
+        {favourite && <Favourite onGoBack={() => setFavourite(false)} />}
+      </div>
+    </>
   );
 }
 
