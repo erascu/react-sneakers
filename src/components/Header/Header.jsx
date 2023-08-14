@@ -1,11 +1,12 @@
-import React from 'react'
-import styles from './Header.module.scss'
+import React from 'react';
+import styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
 
-function Header(props) {
+function Header({ onClickCart }) {
     return (
         <>
             <header className={styles.header}>
-                <button onClick={props.onLogoClick}>
+                <Link to='/'>
                     <div className={styles.header__logo}>
                         <img src="/img/logo.png" alt="Logo" />
                         <div className={styles.logo__info}>
@@ -13,15 +14,15 @@ function Header(props) {
                             <p>Магазин лучших кроссовок</p>
                         </div>
                     </div>
-                </button>
+                </Link>
                 <div className={styles.header__icons}>
-                    <button onClick={props.onClickCart} className={`${styles.cart} ${styles.header__btns}`}>
+                    <button onClick={onClickCart} className={`${styles.cart} ${styles.header__btns}`}>
                         <img src="/img/cart.svg" alt="Cart" />
                         <p>0 лей</p>
                     </button>
-                    <button onClick={props.onClickFav} className={`${styles.favourite} ${styles.header__btns}`}>
+                    <Link to='/favourite' className={`${styles.favourite} ${styles.header__btns}`}>
                         <img src="/img/favourite.svg" alt="Favourite" />
-                    </button>
+                    </Link>
                     <button className={`${styles.user} ${styles.header__btns}`}>
                         <img src="/img/user.svg" alt="User" />
                     </button>

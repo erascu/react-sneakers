@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Button.module.scss';
 
-function Button(props) {
+function Button({ onGoToMain, onClickBack, title }) {
     return (
         <>
-            <button onClick={props.onClickBack} className={styles.button}>
-                <h3>{props.title}</h3 >
+            <Link onClick={onClickBack} to={onGoToMain} className={styles.button}>
+                <h3>{title}</h3 >
                 <img src="./img/arrow-back.svg" alt="Arrow" />
-            </button>
+            </Link>
         </>
     )
 }

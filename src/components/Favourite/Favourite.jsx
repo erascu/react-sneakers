@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Favourite.module.scss';
 import Btn from '../../components/Button/Button'
 
-function Favourite(props) {
+function Favourite() {
     return (
         <>
             <section className={styles.favourite}>
@@ -19,7 +19,7 @@ function Favourite(props) {
                     <h2>Закладок нет :(</h2>
                     <p>Вы ничего не добавляли в закладки</p>
                     {/* <button onClick={props.onGoBack} className="btn">Вернуться назад</button> */}
-                    <Btn title='Вернуться назад' onClickBack={props.onGoBack} />
+                    <Btn title='Вернуться назад' onGoToMain={'/'} />
                 </div>
             </section>
         </>

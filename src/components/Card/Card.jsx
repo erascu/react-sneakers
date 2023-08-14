@@ -13,7 +13,7 @@ function Card({ img, title, price, onClickPlus }) {
     const [like, setLike] = useState(false);
 
     const onClickBtn = () => {
-        onClickPlus({ img, title, price });
+        !isAdded && onClickPlus({ img, title, price });
         setIsAdded(!isAdded);
     }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Cart.module.scss';
 
-function CartItem({ img, title, price }) {
+function CartItem({ img, title, price, onRemove }) {
     return (
         <div className={styles.cart__block}>
             <div className={styles.cart}>
@@ -11,7 +11,7 @@ function CartItem({ img, title, price }) {
                         <h3>{title}</h3>
                         <p>{price} лей</p>
                     </div>
-                    <button className={styles.close__btn}>
+                    <button onClick={onRemove} className={styles.close__btn}>
                         <img src="./img/close.svg" alt="Close btn" />
                     </button>
                 </div>
@@ -20,4 +20,4 @@ function CartItem({ img, title, price }) {
     )
 }
 
-export default CartItem
+export default CartItem;

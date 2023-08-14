@@ -23,6 +23,31 @@
         width: 250px;
         display: flex;
         flex-wrap: nowrap;
+        position: relative;
+
+        input {
+            width: 151px;
+        }
+
+        .close__btn {
+            position: absolute;
+            right: 0;
+            top: 10.5px;
+            background: none;
+            transition: opacity .1s ease-in-out;
+
+            &:hover {
+                opacity: 0.7;
+            }
+
+            &:active {
+                opacity: 1;
+            }
+
+            img {
+                width: 25px;
+            }
+        }
 
         img {
             margin-right: 14px;
