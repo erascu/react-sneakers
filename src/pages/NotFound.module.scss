@@ -1,5 +1,29 @@
 .main {
     padding: 100px 0 150px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+        font-size: 24px;
+        margin-left: 15px;
+    }
+
+    h2 {
+        font-size: 120px;
+        font-weight: 700;
+        color: #FE6D48;
+    }
+
+    h3 {
+        font-size: 27px;
+    }
+
+    span {
+        font-weight: 900;
+    }
+
+    img {
+        padding: 7px 0 0 0;
+    }
 }

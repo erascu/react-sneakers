@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import AppContext from '../../context';
 import styles from '../Card/Card.module.scss'
 
-function Card({ img, title, price, onClickPlus }) {
-    // const propsTitle = () => {
-    //     if (props.title.length <= 49) {
-    //         return props.title.slice(0, 49);
-    //     } else {
-    //         return props.title.slice(0, 49) + '...';
-    //     }
-    // }
-    const [isAdded, setIsAdded] = useState(false);
-    const [like, setLike] = useState(false);
+function Card({ id, img, title, price, onClickPlus, onClickFav }) {
+    const { isItemAdded } = React.useContext(AppContext);
+    const [like, setLike] = React.useState(false);
+    const itemObj = { id, parentId: id, img, title, price };
 
     const onClickBtn = () => {
-        !isAdded && onClickPlus({ img, title, price });
-        setIsAdded(!isAdded);
+        onClickPlus(itemObj);
     }
 
     const onClickLike = () => {
+        onClickFav(itemObj);
         setLike(!like);
     }
+
     return (
         <>
             <div className={styles.card}>
@@ -37,7 +33,7 @@ function Card({ img, title, price, onClickPlus }) {
                             <p>{price} лей</p>
                         </div>
                         <button className={styles.card__button} onClick={onClickBtn}>
-                            <img src={isAdded ? "./img/add-active.svg" : "./img/add-btn.svg"} alt="Add button" />
+                            <img src={isItemAdded(id) ? "./img/add-active.svg" : "./img/add-btn.svg"} alt="Add button" />
                         </button>
                     </div>
                 </div>

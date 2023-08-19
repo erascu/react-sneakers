@@ -29,6 +29,21 @@
     background: none;
 }
 
+.close__btn {
+    position: absolute;
+    opacity: 0.8;
+    transition: opacity .1s ease-in-out;
+    background: none;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &:active {
+        opacity: 0.8;
+    }
+}
+
 .card__img {
     overflow: hidden;
     display: flex;

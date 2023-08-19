@@ -79,6 +79,18 @@
 
     .favourite {
         margin-right: 30px;
+        display: flex;
+        align-items: flex-end;
+
+        p {
+            margin-left: -1px;
+            margin-bottom: -2px;
+            white-space: nowrap;
+            font-size: 11px;
+
+            color: #5C5C5C;
+            font-weight: 600;
+        }
     }
 }
 

@@ -3,30 +3,45 @@ import axios from 'axios';
 import styles from './Main.module.scss'
 import Card from '../Card/Card'
 import Skeleton from '../Card/Skeleton';
-// import Items from '../Items'
 
-function Main({ fetchData, cartItem, sneakers, loading }) {
+function Main({ fetchData, setCartItems, sneakers, loading, onFav, onSetFav }) {
     const [searchValue, setSearchValue] = React.useState('');
-    // const [products, setProducts] = useState([]);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const resp = await fetch('https://64c67ca00a25021fde91b2af.mockapi.io/products');
-    //         const data = await resp.json();
-    //         setProducts(data);
-    //     };
+    const onAddToCard = async obj => {
+        try {
+            const findItem = sneakers.find(item => Number(item.parentId) === Number(obj.id));
 
-    //     fetchData();
-    // }, []);
-
-    const onAddToCard = (item) => {
-        axios.post('https://64c67ca00a25021fde91b2af.mockapi.io/cart', item);
-        cartItem([...sneakers, item]);
+            if (findItem) {
+                setCartItems(prev => prev.filter(item => Number(item.parentId) !== Number(obj.id))); //visual delete cart item
+                await axios.delete(`https://fb21186f41810b45.mokky.dev/cart/${findItem.id}`); //backend delete cart item
+            } else {
+                const { data } = await axios.post('https://fb21186f41810b45.mokky.dev/cart', obj);
+                setCartItems(prev => [...prev, data]);
+            }
+        } catch (error) {
+            console.log(`Something went wrong: ${error}`);
+        }
+        // console.log(obj);
     }
 
-    // const onAddToFavourite = (item) => {
-    //     axios.post('')
-    // }
+    const onAddToFavourite = async item => {
+        try {
+            if (onFav.find(favObj => Number(favObj.id) === Number(item.id))) {
+                axios.delete(`https://fb21186f41810b45.mokky.dev/fav/${item.id}`); //backend delete fav item
+                onSetFav(prev => prev.filter(obj => Number(obj.id) !== Number(item.id))); //visual delete fav item
+            } else {
+                const { data } = await axios.post('https://fb21186f41810b45.mokky.dev/fav', item);
+                onSetFav([...onFav, data]);
+            }
+        } catch (error) {
+            // alert("Error: Couldn't add to Favourite");
+            console.log(`Something went wrong: ${error}`);
+        }
+
+        // axios.post('https://fb21186f41810b45.mokky.dev/fav', item);
+        // console.log(item);
+        // onSetFav([...onFav, item]);
+    }
 
     const searchInput = (e) => {
         setSearchValue(e.target.value);
@@ -53,13 +68,8 @@ function Main({ fetchData, cartItem, sneakers, loading }) {
                 </div>
             </div >
             <div className={styles.main__block}>
-                {/* <Card title="Мужские Кроссовки Nike Blazer Mid Suede" price={12999} img="./img/sneakers/1.jpg" />
-                <Card title="Мужские Кроссовки Nike Air Max 270" price={13600} img="./img/sneakers/2.jpg" />
-                <Card title="Мужские Кроссовки Nike Blazer Mid Suede" price={8499} img="./img/sneakers/3.jpg" />
-                <Card title="Кроссовки Puma X Aka Boku Future Rider" price={8999} img="./img/sneakers/4.jpg" /> */}
-
-                {loading ? [...new Array(12)].map((_, index) => <Skeleton key={index} />) : fetchData.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())).map(item => {
-                    return <Card key={item.id} title={item.title} price={item.price} img={item.img} onClickPlus={onAddToCard} />
+                {loading ? [...new Array(8)].map((_, index) => <Skeleton key={index} />) : fetchData.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())).map(item => {
+                    return <Card added={sneakers.some(obj => obj.id === item.id)} key={item.id} {...item} onClickPlus={onAddToCard} onClickFav={onAddToFavourite} />
                 })}
             </div>
         </main>

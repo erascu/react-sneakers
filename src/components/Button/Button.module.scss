@@ -34,4 +34,9 @@
     &:active {
         background-color: darken(#9DD458, 5%);
     }
+
+    &:disabled {
+        background-color: #bebebe;
+        cursor: normal;
+    }
 }

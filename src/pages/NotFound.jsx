@@ -5,7 +5,10 @@ function NotFound() {
     return (
         <>
             <div className={styles.main}>
-                <img src="img/404.png" alt="404 Not Found" />
+                <p>OOPS...</p>
+                <img src="./img/404.svg" alt="404 Not Found" />
+                <h2>404</h2>
+                <h3>PAGE <span>NOT FOUND</span></h3>
             </div>
         </>
     )

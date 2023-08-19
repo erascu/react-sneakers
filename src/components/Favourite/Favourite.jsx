@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from './Favourite.module.scss';
-import Btn from '../../components/Button/Button'
+import FavCard from '../Card/FavCard';
+import Btn from '../../components/Button/Button';
+import AppContext from '../../context';
 
-function Favourite() {
+function Favourite({ onRemove }) {
+    const { favourites } = React.useContext(AppContext);
+
     return (
         <>
             <section className={styles.favourite}>
@@ -10,17 +14,14 @@ function Favourite() {
                     <h1>Мои закладки</h1>
                 </div >
                 <div className={styles.favourite__block}>
-                    {/* {products.map(item => {
-                    return <Card key={item.id} title={item.title} price={item.price} img={item.img} />
-                })} */}
+                    {favourites.length > 0 && favourites.map((item, index) => { return <FavCard onRemove={() => onRemove(item.id)} key={index} {...item} /> })}
                 </div>
-                <div className={styles.favourite__empty}>
+                {favourites.length === 0 && <><div className={styles.favourite__empty}>
                     <img src="./img/empty-fav.png" alt="favourite" />
-                    <h2>Закладок нет :(</h2>
+                    <h2>У вас нет закладок</h2>
                     <p>Вы ничего не добавляли в закладки</p>
-                    {/* <button onClick={props.onGoBack} className="btn">Вернуться назад</button> */}
                     <Btn title='Вернуться назад' onGoToMain={'/'} />
-                </div>
+                </div></>}
             </section>
         </>
     )
